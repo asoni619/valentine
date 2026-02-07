@@ -9,14 +9,60 @@
             text-align: center; 
             font-family: 'Arial', sans-serif; 
             background-color: #fff0f5; 
-            padding-top: 100px; 
-            overflow: hidden; /* Prevents scrollbars if the button moves off-screen */
+            margin: 0;
+            padding-top: 50px; 
+            overflow-x: hidden; 
         }
-        h1 { color: #ff1493; font-size: 2.5rem; padding: 0 20px; }
-        .buttons { margin-top: 50px; position: relative; height: 300px; }
+        
+        /* The Polaroid Photo Frame */
+        .photo-container {
+            background: white;
+            padding: 15px 15px 45px 15px;
+            display: inline-block;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: rotate(-2deg);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        /* Floating Hearts around photo */
+        .photo-container::before {
+            content: "💖";
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            font-size: 2rem;
+            transform: rotate(15deg);
+        }
+        
+        .photo-container img {
+            width: 280px; /* Perfect size for mobile and desktop */
+            height: auto;
+            display: block;
+            border: 1px solid #eee;
+        }
+
+        h1 { 
+            color: #d02090; 
+            font-size: 2.2rem; 
+            padding: 0 20px;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        .emoji-footer { font-size: 2.5rem; margin-bottom: 20px; }
+
+        .buttons { 
+            margin-top: 20px; 
+            position: relative; 
+            height: 150px; 
+        }
+
         button { 
-            padding: 15px 35px; 
-            font-size: 1.3rem; 
+            padding: 15px 40px; 
+            font-size: 1.2rem; 
             cursor: pointer; 
             border-radius: 50px; 
             border: none; 
@@ -24,12 +70,22 @@
             font-weight: bold;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        #yes { background-color: #ff69b4; color: white; position: relative; z-index: 10; }
-        #yes:hover { transform: scale(1.1); background-color: #ff1493; }
+
+        #yes { 
+            background-color: #ff69b4; 
+            color: white; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        #yes:hover { 
+            transform: scale(1.1); 
+            background-color: #ff1493; 
+        }
         
         #no { 
-            background-color: #808080; 
-            color: white; 
+            background-color: #f0f0f0; 
+            color: #888; 
             position: absolute; 
             transition: 0.1s ease;
             z-index: 5;
@@ -37,34 +93,42 @@
     </style>
 </head>
 <body>
-    <h1>Will you be my Valentine? 💖</h1>
+
+    <div class="photo-container">
+        <img src="IMG_1417.jpg" alt="Us">
+    </div>
+
+    <h1>Akshit Soni, will you be my Valentine?</h1>
+    <div class="emoji-footer">🧸💖</div>
     
     <div class="buttons">
-        <button id="yes" onclick="celebrate()">YES</button>
-        <button id="no" onmouseover="moveButton()" onclick="moveButton()">NO</button>
+        <button id="yes" onclick="celebrate()">Yes! ✨</button>
+        <button id="no" onmouseover="moveButton()" onclick="moveButton()">No 🥺</button>
     </div>
 
     <script>
         function moveButton() {
-            // Calculates random position within the visible screen area
+            // Screen boundaries
             const x = Math.random() * (window.innerWidth - 150);
             const y = Math.random() * (window.innerHeight - 150);
             
             const noBtn = document.getElementById('no');
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
-            noBtn.style.position = 'fixed'; // Keeps it floating over everything
+            noBtn.style.position = 'fixed'; 
         }
 
         function celebrate() {
             alert("You have now signed up for Akshit Soni permanently! 🥰");
-            // Optional: Redirects or adds extra flair
             document.body.innerHTML = `
-                <h1 style="margin-top:200px;">Yay! ❤️<br>Welcome to the Akshit Soni Life!</h1>
-                <p style="font-size: 50px;">🎉✨💖</p>
+                <div style="margin-top:150px; padding: 20px;">
+                    <h1 style="font-size: 3.5rem; color: white;">Yay! ❤️</h1>
+                    <h2 style="color: white; font-size: 1.8rem;">You have now signed up for Akshit Soni permanently!</h2>
+                    <p style="font-size: 100px;">🎉✨💖</p>
+                </div>
             `;
             document.body.style.backgroundColor = "#ff69b4";
-            document.body.style.color = "white";
+            document.body.style.transition = "background-color 0.5s ease";
         }
     </script>
 </body>
